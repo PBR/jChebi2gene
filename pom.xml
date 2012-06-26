@@ -10,8 +10,45 @@
   <name>chebi2gene</name>
   <url>http://maven.apache.org</url>
 
+    <licenses>
+      <license>
+        <name>Apache 2</name>
+        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+    <organization>
+      <name>Wageningen UR Plant breeding</name>
+      <url>http://www.plantbreeding.wur.nl</url>
+    </organization>
+    <developers>
+      <developer>
+        <id>rf</id>
+        <name>Richard Finkers</name>
+        <email>richard.finkers@wur.nl</email>
+        <url>http://www.finkers.tk</url>
+        <timezone>+1</timezone>
+        <organization>Wageningen UR</organization>
+        <organizationUrl>http://www.plantbreeding.wur.nl</organizationUrl>
+        <roles>
+          <role>Manager</role>
+          <role>developer</role>
+        </roles>
+      </developer>
+      <developer>
+        <name>Pierre-Yves Chibon</name>
+        <timezone>+1</timezone>
+        <organization>Wageningen UR</organization>
+        <organizationUrl>http://www.plantbreeding.wur.nl</organizationUrl>
+        <roles>
+          <role>developer</role>
+        </roles>
+      </developer>
+    </developers>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <skipTests>true</skipTests>
   </properties>
 
   <dependencies>
