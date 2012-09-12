@@ -26,21 +26,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The QueryRdfEngine class handles the querying logic.
- * This class runs the given sparql query either on a given (loca) model
- * or against a remote model available in a virtuoso.
+ * The QueryRdfEngine class handles the querying logic. This class runs the
+ * given sparql query either on a given (loca) model or against a remote model
+ * available in a virtuoso.
  *
  * @author Pierre-Yves Chibon -- py@chibon.fr
  */
 class QueryRdfEngine {
 
-    /** Default URI used by the engine. */
+    /**
+     * Default URI used by the engine.
+     */
     protected String URI;
-    /** boolean variable to output more information to std out. */
+    /**
+     * boolean variable to output more information to std out.
+     */
     protected boolean debug = false;
-    /** default URL to virtuoso. */
+    /**
+     * default URL to virtuoso.
+     */
     protected String endpoint = "http://sparql.plantbreeding.nl:8080/sparql/";
-    /** logger. */
+    /**
+     * logger.
+     */
     private static final Logger LOG = Logger.getLogger(
             QueryRdfEngine.class.getName());
 
@@ -52,6 +60,7 @@ class QueryRdfEngine {
 
     /**
      * Constructor setting the URI used.
+     *
      * @param uri the uri to set
      */
     public QueryRdfEngine(final String uri) {
@@ -60,6 +69,7 @@ class QueryRdfEngine {
 
     /**
      * Returns the URI of the engine.
+     *
      * @return URI
      */
     public String getURI() {
@@ -68,6 +78,7 @@ class QueryRdfEngine {
 
     /**
      * Set the engine's URI.
+     *
      * @param uri String
      */
     public void setURI(final String uri) {
@@ -76,6 +87,7 @@ class QueryRdfEngine {
 
     /**
      * Return the debug mode.
+     *
      * @return boolean debug
      */
     public boolean isDebug() {
@@ -84,6 +96,7 @@ class QueryRdfEngine {
 
     /**
      * Set the debug mode.
+     *
      * @param newdebug boolean
      */
     public void setDebug(final boolean newdebug) {
@@ -92,6 +105,7 @@ class QueryRdfEngine {
 
     /**
      * Return the Service (endpoint url used for sparql query).
+     *
      * @return endpoint url of the endpoint
      */
     public String getService() {
@@ -100,6 +114,7 @@ class QueryRdfEngine {
 
     /**
      * Set the Service (endpoint url used for sparql query).
+     *
      * @param newservice url of the endpoint
      */
     public void setService(final String newservice) {
@@ -110,6 +125,7 @@ class QueryRdfEngine {
     /**
      * From a given querystring and endpoint, generate a QueryExecutionFactory
      * and return the QueryExecution.
+     *
      * @param service url of the endpoint to query
      * @param querystring sparql query
      * @return a QueryExecution object
@@ -124,8 +140,7 @@ class QueryRdfEngine {
         try {
 //            qexec = QueryExecutionFactory.sparqlService(endpoint, querystring);
             qexec = new QueryEngineHTTP(endpoint, querystring);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
             LOG.log(Level.SEVERE, "Query: \n{0}", querystring);
             if (this.debug) {
@@ -138,6 +153,7 @@ class QueryRdfEngine {
 
     /**
      * Runs a remote Select Query on a given remote sparql endpoint.
+     *
      * @param service url of the endpoint to query
      * @param querystring sparql query
      * @return a ResultSet object
@@ -148,8 +164,7 @@ class QueryRdfEngine {
         ResultSet results;
         try {
             results = qexec.execSelect();
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return results;
@@ -157,6 +172,7 @@ class QueryRdfEngine {
 
     /**
      * Runs a remote Select Query on the default sparql endpoint.
+     *
      * @param querystring a sparql query
      * @return a ResultSet object
      */
@@ -165,8 +181,7 @@ class QueryRdfEngine {
         ResultSet results;
         try {
             results = qexec.execSelect();
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return results;
@@ -175,6 +190,7 @@ class QueryRdfEngine {
     /**
      * Runs a given query on a remote endpoint and returns output of the give
      * key.
+     *
      * @param service the sparql endpoint against which to run the query
      * @param querystring a sparql query
      * @param arraylist an ArrayList in which the output of the query will be
@@ -191,8 +207,7 @@ class QueryRdfEngine {
         try {
             results = qexec.execSelect();
             this.getResults(results, key, arraylist);
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return arraylist;
@@ -201,6 +216,7 @@ class QueryRdfEngine {
     /**
      * Runs a given query on a remote endpoint (endpoint) and returns output of
      * the given key.
+     *
      * @param querystring a sparql query
      * @param arraylist a list in which the results of the query will be stored
      * @param key the key to retrieve the results from the query
@@ -214,8 +230,7 @@ class QueryRdfEngine {
         try {
             results = qexec.execSelect();
             this.getResults(results, key, arraylist);
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return arraylist;
@@ -224,6 +239,7 @@ class QueryRdfEngine {
     /**
      * Runs a given query on the remote endpoint (endpoint) and returns output
      * of the given keys in the given arraylist.
+     *
      * @param querystring a sparql query
      * @param arraylist a list in which the results of the query will be stored
      * @param keys the list of key to retrieve the results from the query
@@ -237,8 +253,7 @@ class QueryRdfEngine {
         try {
             results = qexec.execSelect();
             this.getResults(results, keys, arraylist);
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return arraylist;
@@ -247,6 +262,7 @@ class QueryRdfEngine {
     /**
      * Runs a given query on a remote endpoint (endpoint) and returns output of
      * the given keys in the given arraylist.
+     *
      * @param service the sparql endpoint against which the query will be run
      * @param querystring a sparql query
      * @param arraylist a list in which the results of the query will be stored
@@ -261,8 +277,7 @@ class QueryRdfEngine {
         try {
             results = qexec.execSelect();
             this.getResults(results, keys, arraylist);
-        }
-        finally {
+        } finally {
             qexec.close();
         }
         return arraylist;
@@ -271,6 +286,7 @@ class QueryRdfEngine {
     /**
      * Returns the output from the given key in the given ResultSet in the given
      * ArrayList.
+     *
      * @param results a ResultSet object
      * @param keys a list of key
      * @param arraylist a list of list in which to store the results extracted
@@ -311,6 +327,7 @@ class QueryRdfEngine {
     /**
      * Returns the output from the given keys in the given ResultSet in the
      * given ArrayList.
+     *
      * @param results a ResultSet object
      * @param key the key to retrieve the result from the ResultSet
      * @param arraylist the list in which the results will be stored
@@ -339,8 +356,8 @@ class QueryRdfEngine {
     }
 
     /**
-     * Print the keyword from the ResultSet.
-     * (generated by a query)
+     * Print the keyword from the ResultSet. (generated by a query)
+     *
      * @param results a ResultSet object
      * @param key a key to retrieve results from the ResultSet
      */
@@ -351,8 +368,8 @@ class QueryRdfEngine {
     }
 
     /**
-     * Print all the keywords from a ResultSet.
-     * (generated by a query)
+     * Print all the keywords from a ResultSet. (generated by a query)
+     *
      * @param results a ResultSet object
      * @param keys a list of keys to retrieve results from the ResultSet
      */

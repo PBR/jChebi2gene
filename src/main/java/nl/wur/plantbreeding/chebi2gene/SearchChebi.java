@@ -30,9 +30,8 @@ public class SearchChebi {
 
     /**
      * Search the chebi database for molecule having the given string in their
-     * name. 
-     * The data returned contains the chebi identifier, the name and synonyms of
-     * the molecule in chebi.
+     * name. The data returned contains the chebi identifier, the name and
+     * synonyms of the molecule in chebi.
      *
      * @param compound_name a string, name of the molecule to search in chebi.
      * @return a dictionary containing all the molecule found for having the
@@ -46,12 +45,11 @@ public class SearchChebi {
         QueryRdf query = new QueryRdf();
         return query.getExactChebiFromSearch(compound_name);
     }
-    
+
     /**
      * Search the chebi database for molecule having the given string in their
-     * name or in their synonyms.
-     * The data returned contains the chebi identifier, the name and synonyms of
-     * the molecule in chebi.
+     * name or in their synonyms. The data returned contains the chebi
+     * identifier, the name and synonyms of the molecule in chebi.
      *
      * @param compound_name a string, name of the molecule to search in chebi.
      * @return a dictionary containing all the molecule found for having the

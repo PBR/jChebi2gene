@@ -20,61 +20,57 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * This class handles the core function of the chebi2gene package.
- * For a given chebi identifier it will search all the proteins related to this
- * compound and then retrieve all the pathways, genes and organisms associated
- * with these proteins.
+ * This class handles the core function of the chebi2gene package. For a given
+ * chebi identifier it will search all the proteins related to this compound and
+ * then retrieve all the pathways, genes and organisms associated with these
+ * proteins.
  *
  * @author Pierre-Yves Chibon -- py@chibon.fr
  */
 public class Chebi2gene {
-    
+
     /**
-     * A dictionary containing all the proteins related with the
-     * compound specified.
-     * The data structure returned is like: {string: [String]}, where the keys
-     * are reaction identifiers and the values are list of proteins associated
-     * with the reaction.
+     * A dictionary containing all the proteins related with the compound
+     * specified. The data structure returned is like: {string: [String]}, where
+     * the keys are reaction identifiers and the values are list of proteins
+     * associated with the reaction.
      */
     private HashMap<String, ArrayList<String>> proteins =
             new HashMap<String, ArrayList<String>>();
     /**
-     * A dictionary containing all the pathways related with the
-     * proteins specified.
-     * The data structure returned is like: {string: [String]}, where the keys
-     * are the uniprot identifier and the values are list of pathways associated
-     * with the protein.
+     * A dictionary containing all the pathways related with the proteins
+     * specified. The data structure returned is like: {string: [String]}, where
+     * the keys are the uniprot identifier and the values are list of pathways
+     * associated with the protein.
      */
     private HashMap<String, ArrayList<String>> pathways =
             new HashMap<String, ArrayList<String>>();
     /**
-     * A dictionary containing all the organism related with the
-     * proteins specified.
-     * The data structure returned is like: {string: [String]}, where the keys
-     * are the uniprot identifier and the values are list of organisms
+     * A dictionary containing all the organism related with the proteins
+     * specified. The data structure returned is like: {string: [String]}, where
+     * the keys are the uniprot identifier and the values are list of organisms
      * associated with the protein.
      */
     private HashMap<String, ArrayList<String>> organisms =
             new HashMap<String, ArrayList<String>>();
     /**
      * A dictionary containing all the genes related with the proteins
-     * specified.
-     * The data structure returned is like: {string: [{String: String}]}, where
-     * the keys are the uniprot identifier and the values are list of gene
-     * hash map associated with the protein.
+     * specified. The data structure returned is like: {string: [{String:
+     * String}]}, where the keys are the uniprot identifier and the values are
+     * list of gene hash map associated with the protein.
      */
     private HashMap<String, ArrayList<HashMap<String, String>>> genes =
             new HashMap<String, ArrayList<HashMap<String, String>>>();
-    
+
     /**
-     * Constructor which for a given chebi identifier will retrieve all
-     * proteins associated with this compound and then all pathways, genes and
-     * organisms associated with the proteins found.
-     * The information can then be retrieved using the different getters
-     * available.
-     * @param chebi_id 
+     * Constructor which for a given chebi identifier will retrieve all proteins
+     * associated with this compound and then all pathways, genes and organisms
+     * associated with the proteins found. The information can then be retrieved
+     * using the different getters available.
+     *
+     * @param chebi_id
      */
-    public void Chebi2gene(String chebi_id){
+    public void Chebi2gene(String chebi_id) {
         QueryRdf query = new QueryRdf();
         proteins = query.getProteinOfChebi(chebi_id);
         pathways = query.getPathwaysOfProteins(proteins);
@@ -84,6 +80,7 @@ public class Chebi2gene {
 
     /**
      * Returns the genes information.
+     *
      * @return A dictionary containing all the genes related with the proteins
      * specified.
      */
@@ -93,6 +90,7 @@ public class Chebi2gene {
 
     /**
      * Returns the organisms information.
+     *
      * @return A dictionary containing all the genes related with the proteins
      * specified.
      */
@@ -102,6 +100,7 @@ public class Chebi2gene {
 
     /**
      * Returns the pathways information.
+     *
      * @return A dictionary containing all the pathways related with the
      * proteins specified.
      */
@@ -111,13 +110,11 @@ public class Chebi2gene {
 
     /**
      * Returns the proteins information.
+     *
      * @return A dictionary containing all the proteins related with the
      * compound specified.
      */
     public HashMap<String, ArrayList<String>> getProteins() {
         return proteins;
     }
-    
-    
-    
 }

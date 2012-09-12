@@ -286,7 +286,7 @@ public class QueryRdf extends QueryRdfEngine {
         for (Entry<String, ArrayList<String>> entry : data.entrySet()) {
             ArrayList<String> arrayList = entry.getValue();
             String proteins = arrayListToString(arrayList);
-            
+
             ArrayList<ArrayList<String>> matrix =
                     new ArrayList<ArrayList<String>>();
             String querystring =
@@ -342,7 +342,7 @@ public class QueryRdf extends QueryRdfEngine {
         for (Entry<String, ArrayList<String>> entry : data.entrySet()) {
             ArrayList<String> arrayList = entry.getValue();
             String proteins = arrayListToString(arrayList);
-            
+
             ArrayList<ArrayList<String>> matrix =
                     new ArrayList<ArrayList<String>>();
             String querystring =
