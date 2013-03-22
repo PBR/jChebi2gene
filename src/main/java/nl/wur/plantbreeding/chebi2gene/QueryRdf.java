@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Pierre-Yves Chibon <py@chibon.fr>.
+ * Copyright 2013 Wageningen UR Plant breeding.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -30,6 +30,11 @@ import java.util.logging.Logger;
 public class QueryRdf extends QueryRdfEngine {
 
     /**
+     * The logger.
+     */
+    private static final Logger LOG = Logger.getLogger(
+            QueryRdf.class.getName());
+    /**
      * Graph containing the ITAG information.
      */
     private String itag = "FROM <http://itag2.pbr.wur.nl/> \n";
@@ -45,11 +50,6 @@ public class QueryRdf extends QueryRdfEngine {
      * Graph containing rhea from EBI.
      */
     private final String rhea = "FROM <http://rhea.pbr.wur.nl/> \n";
-    /**
-     * The logger.
-     */
-    private static final Logger LOG = Logger.getLogger(
-            QueryRdf.class.getName());
 
     /**
      * Default constructor.

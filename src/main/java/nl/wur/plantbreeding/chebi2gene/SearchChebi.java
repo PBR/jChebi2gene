@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Pierre-Yves Chibon <py@chibon.fr>.
+ * Copyright 2013 Wageningen UR Plant breeding.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
