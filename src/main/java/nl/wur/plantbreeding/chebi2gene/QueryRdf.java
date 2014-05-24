@@ -94,10 +94,10 @@ public class QueryRdf extends QueryRdfEngine {
      * molecules and a list of its synonym.
      */
     public final HashMap<String, HashMap<String, ArrayList<String>>> getExactChebiFromSearch(final String name) {
-        ArrayList<ArrayList<String>> matrix =
-                new ArrayList<ArrayList<String>>();
-        String querystring =
-                "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> \n"
+        ArrayList<ArrayList<String>> matrix
+                = new ArrayList<ArrayList<String>>();
+        String querystring
+                = "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> \n"
                 + "    PREFIX obo:<http://purl.obolibrary.org/obo#> \n"
                 + "    SELECT DISTINCT ?id ?name ?syn \n"
                 + chebi
@@ -114,8 +114,8 @@ public class QueryRdf extends QueryRdfEngine {
         String[] keys = {"id", "name", "syn"};
         matrix = this.remoteSelectQuery(querystring, matrix, keys);
 
-        HashMap<String, HashMap<String, ArrayList<String>>> output =
-                new HashMap<String, HashMap<String, ArrayList<String>>>();
+        HashMap<String, HashMap<String, ArrayList<String>>> output
+                = new HashMap<String, HashMap<String, ArrayList<String>>>();
         for (ArrayList<String> rows : matrix) {
             String[] tmp1 = rows.get(0).split("/");
             String[] tmp2 = tmp1[tmp1.length - 1].split("_");
@@ -127,8 +127,8 @@ public class QueryRdf extends QueryRdfEngine {
                 tmp.put("syn", syns);
                 output.put(chebi_id, tmp);
             } else {
-                HashMap<String, ArrayList<String>> tmp =
-                        new HashMap<String, ArrayList<String>>();
+                HashMap<String, ArrayList<String>> tmp
+                        = new HashMap<String, ArrayList<String>>();
                 ArrayList<String> names = new ArrayList<String>();
                 names.add(rows.get(1));
                 ArrayList<String> syns = new ArrayList<String>();
@@ -154,10 +154,10 @@ public class QueryRdf extends QueryRdfEngine {
      * the name of the molecules and a list of its synonym.
      */
     public final HashMap<String, HashMap<String, ArrayList<String>>> getExtendedChebiFromSearch(final String name) {
-        ArrayList<ArrayList<String>> matrix =
-                new ArrayList<ArrayList<String>>();
-        String querystring =
-                "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> \n"
+        ArrayList<ArrayList<String>> matrix
+                = new ArrayList<ArrayList<String>>();
+        String querystring
+                = "PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> \n"
                 + "    PREFIX obo:<http://purl.obolibrary.org/obo#> \n"
                 + "    SELECT DISTINCT ?id ?name ?syn \n"
                 + chebi
@@ -175,8 +175,8 @@ public class QueryRdf extends QueryRdfEngine {
         String[] keys = {"id", "name", "syn"};
         matrix = this.remoteSelectQuery(querystring, matrix, keys);
 
-        HashMap<String, HashMap<String, ArrayList<String>>> output =
-                new HashMap<String, HashMap<String, ArrayList<String>>>();
+        HashMap<String, HashMap<String, ArrayList<String>>> output
+                = new HashMap<String, HashMap<String, ArrayList<String>>>();
         for (ArrayList<String> rows : matrix) {
             String[] tmp1 = rows.get(0).split("/");
             String[] tmp2 = tmp1[tmp1.length - 1].split("_");
@@ -188,8 +188,8 @@ public class QueryRdf extends QueryRdfEngine {
                 tmp.put("syn", syns);
                 output.put(chebi_id, tmp);
             } else {
-                HashMap<String, ArrayList<String>> tmp =
-                        new HashMap<String, ArrayList<String>>();
+                HashMap<String, ArrayList<String>> tmp
+                        = new HashMap<String, ArrayList<String>>();
                 ArrayList<String> names = new ArrayList<String>();
                 names.add(rows.get(1));
                 ArrayList<String> syns = new ArrayList<String>();
@@ -215,16 +215,16 @@ public class QueryRdf extends QueryRdfEngine {
     public final HashMap<String, ArrayList<
             HashMap<String, String>>> getGenesOfProteins(
             HashMap<String, ArrayList<String>> data) {
-        HashMap<String, ArrayList<HashMap<String, String>>> output =
-                new HashMap<String, ArrayList<HashMap<String, String>>>();
+        HashMap<String, ArrayList<HashMap<String, String>>> output
+                = new HashMap<String, ArrayList<HashMap<String, String>>>();
         for (Entry<String, ArrayList<String>> entry : data.entrySet()) {
             ArrayList<String> arrayList = entry.getValue();
             String proteins = arrayListToString(arrayList);
 
-            ArrayList<ArrayList<String>> matrix =
-                    new ArrayList<ArrayList<String>>();
-            String querystring =
-                    "PREFIX gene:<http://pbr.wur.nl/GENE#> \n"
+            ArrayList<ArrayList<String>> matrix
+                    = new ArrayList<ArrayList<String>>();
+            String querystring
+                    = "PREFIX gene:<http://pbr.wur.nl/GENE#> \n"
                     + "        PREFIX pos:<http://pbr.wur.nl/POSITION#> \n"
                     + "        SELECT DISTINCT ?prot ?name ?sca ?start ?stop ?desc \n"
                     + itag
@@ -259,8 +259,8 @@ public class QueryRdf extends QueryRdfEngine {
                     tmp.add(gene);
                     output.put(prot_id, tmp);
                 } else {
-                    ArrayList<HashMap<String, String>> tmp =
-                            new ArrayList<HashMap<String, String>>();
+                    ArrayList<HashMap<String, String>> tmp
+                            = new ArrayList<HashMap<String, String>>();
                     tmp.add(gene);
                     output.put(prot_id, tmp);
                 }
@@ -281,16 +281,16 @@ public class QueryRdf extends QueryRdfEngine {
      */
     public final HashMap<String, ArrayList<String>> getOrganismOfProteins(
             HashMap<String, ArrayList<String>> data) {
-        HashMap<String, ArrayList<String>> output =
-                new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> output
+                = new HashMap<String, ArrayList<String>>();
         for (Entry<String, ArrayList<String>> entry : data.entrySet()) {
             ArrayList<String> arrayList = entry.getValue();
             String proteins = arrayListToString(arrayList);
 
-            ArrayList<ArrayList<String>> matrix =
-                    new ArrayList<ArrayList<String>>();
-            String querystring =
-                    "PREFIX uniprot:<http://purl.uniprot.org/core/> \n"
+            ArrayList<ArrayList<String>> matrix
+                    = new ArrayList<ArrayList<String>>();
+            String querystring
+                    = "PREFIX uniprot:<http://purl.uniprot.org/core/> \n"
                     + "        SELECT DISTINCT ?prot ?name \n"
                     + uniprot
                     + "        WHERE { \n"
@@ -337,16 +337,16 @@ public class QueryRdf extends QueryRdfEngine {
      */
     public final HashMap<String, ArrayList<String>> getPathwaysOfProteins(
             HashMap<String, ArrayList<String>> data) {
-        HashMap<String, ArrayList<String>> output =
-                new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> output
+                = new HashMap<String, ArrayList<String>>();
         for (Entry<String, ArrayList<String>> entry : data.entrySet()) {
             ArrayList<String> arrayList = entry.getValue();
             String proteins = arrayListToString(arrayList);
 
-            ArrayList<ArrayList<String>> matrix =
-                    new ArrayList<ArrayList<String>>();
-            String querystring =
-                    "PREFIX gene:<http://pbr.wur.nl/GENE#> \n"
+            ArrayList<ArrayList<String>> matrix
+                    = new ArrayList<ArrayList<String>>();
+            String querystring
+                    = "PREFIX gene:<http://pbr.wur.nl/GENE#> \n"
                     + "        PREFIX uniprot:<http://purl.uniprot.org/core/> \n"
                     + "        PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#> \n"
                     + "        SELECT DISTINCT ?prot ?desc \n"
@@ -396,13 +396,13 @@ public class QueryRdf extends QueryRdfEngine {
      */
     public final HashMap<String, ArrayList<String>> getProteinOfChebi(
             String chebi_id) {
-        HashMap<String, ArrayList<String>> output =
-                new HashMap<String, ArrayList<String>>();
+        HashMap<String, ArrayList<String>> output
+                = new HashMap<String, ArrayList<String>>();
 
-        ArrayList<ArrayList<String>> matrix =
-                new ArrayList<ArrayList<String>>();
-        String querystring =
-                "prefix bp: <http://www.biopax.org/release/biopax-level2.owl#> \n"
+        ArrayList<ArrayList<String>> matrix
+                = new ArrayList<ArrayList<String>>();
+        String querystring
+                = "prefix bp: <http://www.biopax.org/release/biopax-level2.owl#> \n"
                 + "    SELECT DISTINCT ?react ?xref \n"
                 + rhea
                 + "    WHERE { \n"

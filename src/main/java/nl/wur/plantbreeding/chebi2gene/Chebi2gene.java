@@ -1,6 +1,6 @@
 /*
  * Copyright 2013 Wageningen UR Plant breeding.
- * 
+ *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -35,32 +35,32 @@ public class Chebi2gene {
      * the keys are reaction identifiers and the values are list of proteins
      * associated with the reaction.
      */
-    private HashMap<String, ArrayList<String>> proteins =
-            new HashMap<String, ArrayList<String>>();
+    private HashMap<String, ArrayList<String>> proteins
+            = new HashMap<String, ArrayList<String>>();
     /**
      * A dictionary containing all the pathways related with the proteins
      * specified. The data structure returned is like: {string: [String]}, where
      * the keys are the uniprot identifier and the values are list of pathways
      * associated with the protein.
      */
-    private HashMap<String, ArrayList<String>> pathways =
-            new HashMap<String, ArrayList<String>>();
+    private HashMap<String, ArrayList<String>> pathways
+            = new HashMap<String, ArrayList<String>>();
     /**
      * A dictionary containing all the organism related with the proteins
      * specified. The data structure returned is like: {string: [String]}, where
      * the keys are the uniprot identifier and the values are list of organisms
      * associated with the protein.
      */
-    private HashMap<String, ArrayList<String>> organisms =
-            new HashMap<String, ArrayList<String>>();
+    private HashMap<String, ArrayList<String>> organisms
+            = new HashMap<String, ArrayList<String>>();
     /**
      * A dictionary containing all the genes related with the proteins
      * specified. The data structure returned is like: {string: [{String:
      * String}]}, where the keys are the uniprot identifier and the values are
      * list of gene hash map associated with the protein.
      */
-    private HashMap<String, ArrayList<HashMap<String, String>>> genes =
-            new HashMap<String, ArrayList<HashMap<String, String>>>();
+    private HashMap<String, ArrayList<HashMap<String, String>>> genes
+            = new HashMap<String, ArrayList<HashMap<String, String>>>();
 
     /**
      * Constructor which for a given chebi identifier will retrieve all proteins
