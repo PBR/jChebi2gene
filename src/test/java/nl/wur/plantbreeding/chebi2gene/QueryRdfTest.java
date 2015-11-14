@@ -27,41 +27,48 @@ import junit.framework.TestCase;
  * @author pierrey
  */
 public class QueryRdfTest extends TestCase {
-    
-    /** Endpoint to query during the tests. */
+
+    /**
+     * Endpoint to query during the tests.
+     */
     private String endpoint = "http://sparql.plantbreeding.nl:8080/sparql/";
-    /** The QueryRdf object used to run the query. */
+    /**
+     * The QueryRdf object used to run the query.
+     */
     private final QueryRdf instance = new QueryRdf();
-    /** Chebi identifier used for the tests. */
+    /**
+     * Chebi identifier used for the tests.
+     */
     private final String chebi_id = "17578";
-    
+
     public QueryRdfTest(String testName) {
         super(testName);
     }
-    
+
     /**
      * Check whether a given url is available or not.
+     *
      * @param url a string of the url to test
      * @return a boolean true if the url is reachable, false otherwise
      */
     private boolean checkUrl(final String url) {
         try {
             HttpURLConnection.setFollowRedirects(false);
-            HttpURLConnection con =
-                    (HttpURLConnection) new URL(url).openConnection();
+            HttpURLConnection con
+                    = (HttpURLConnection) new URL(url).openConnection();
             con.setRequestMethod("HEAD");
-            return ( con.getResponseCode() == HttpURLConnection.HTTP_OK );
-        }
-        catch (Exception e) {
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
     /**
-     * Browse all the network interface, retrieve all the IPs and checks if
-     * one of them is in the 137.224 or 10.73 range.
-     * Returns true if it is, false otherwise.
+     * Browse all the network interface, retrieve all the IPs and checks if one
+     * of them is in the 137.224 or 10.73 range. Returns true if it is, false
+     * otherwise.
+     *
      * @return a boolean showing if the run if perform in the allowed network
      * range.
      * @throws SocketException if something goes wrong while trying to retrieve
@@ -79,8 +86,8 @@ public class QueryRdfTest extends TestCase {
             while (e2.hasMoreElements()) {
                 InetAddress ipad = (InetAddress) e2.nextElement();
                 String ip = ipad.toString();
-                if (ip.startsWith("/137.224") || ip.startsWith("/10.73") ||
-                        ip.startsWith("/192.168.41")) {
+                if (ip.startsWith("/137.224") || ip.startsWith("/10.73")
+                        || ip.startsWith("/192.168.41")) {
                     allowed = true;
                 }
             }
@@ -90,7 +97,7 @@ public class QueryRdfTest extends TestCase {
 
     @Override
     public final void setUp() throws SocketException {
-        
+
         if (this.allowedNetwork()) {
             System.out.println("Using endpoint: " + endpoint);
             if (!checkUrl(endpoint)) {
@@ -105,12 +112,12 @@ public class QueryRdfTest extends TestCase {
             System.out.println("Ip not in the allowed range");
             endpoint = null;
         }
-        if (endpoint == null){
+        if (endpoint == null) {
             assertNotNull(endpoint);
         }
         instance.endpoint = endpoint;
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
@@ -122,14 +129,14 @@ public class QueryRdfTest extends TestCase {
     public void testGetExactChebiFromSearch() {
         System.out.println("getExactChebiFromSearch");
         String name = "-beta-carotene";
-        HashMap<String, HashMap<String, ArrayList<String>>> result =
-                instance.getExactChebiFromSearch(name);
+        HashMap<String, HashMap<String, ArrayList<String>>> result
+                = instance.getExactChebiFromSearch(name);
         assertEquals(1, result.size());
 
         ArrayList<String> expectedName = new ArrayList<String>();
         expectedName.add("(5S,6R)-beta-carotene 5,6-epoxide^^http://www.w3.org/2001/XMLSchema#string");
         assertEquals(expectedName, result.get("35309").get("name"));
-        
+
         assertEquals(3, result.get("35309").get("syn").size());
     }
 
@@ -139,8 +146,8 @@ public class QueryRdfTest extends TestCase {
     public void testGetExtendedChebiFromSearch() {
         System.out.println("getExtendedChebiFromSearch");
         String name = "trans-beta-carotene";
-        HashMap<String, HashMap<String, ArrayList<String>>> result =
-                instance.getExtendedChebiFromSearch(name);
+        HashMap<String, HashMap<String, ArrayList<String>>> result
+                = instance.getExtendedChebiFromSearch(name);
         assertEquals(1, result.size());
 
         ArrayList<String> expectedName = new ArrayList<String>();
@@ -161,8 +168,8 @@ public class QueryRdfTest extends TestCase {
         ArrayList<String> prot = new ArrayList<String>();
         prot.add("Q38933");
         data.put("key", prot);
-        HashMap<String, ArrayList<HashMap<String, String>>> result =
-                instance.getGenesOfProteins(data);
+        HashMap<String, ArrayList<HashMap<String, String>>> result
+                = instance.getGenesOfProteins(data);
         assertEquals(4, result.get("Q38933").size());
     }
 
@@ -175,9 +182,9 @@ public class QueryRdfTest extends TestCase {
         ArrayList<String> prot = new ArrayList<String>();
         prot.add("Q38933");
         data.put("key", prot);
-        HashMap<String, ArrayList<String>> result =
-                instance.getOrganismOfProteins(data);
-        
+        HashMap<String, ArrayList<String>> result
+                = instance.getOrganismOfProteins(data);
+
         ArrayList<String> expectedOrga = new ArrayList<String>();
         expectedOrga.add("Arabidopsis thaliana");
         assertEquals(expectedOrga, result.get("Q38933"));
